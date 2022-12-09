@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getFilteredTasks, getTasks } from "../../features/listSlice";
-import { CheckboxStyled } from "./CheckBoxSyled";
+import { CheckBoxInput, CheckboxStyled } from "./CheckBoxSyled";
 
 export default function CheckBox() {
   const [hide, setHide] = useState(false);
@@ -17,12 +17,11 @@ export default function CheckBox() {
   };
   return (
     <CheckboxStyled>
-      <input
+      <CheckBoxInput
         type="checkbox"
-        style={{ color: "#008594", width: 24 + "px" }}
         checked={hide}
         onChange={handleFiltre}
-      ></input>
+      ></CheckBoxInput>
       <label htmlFor="">Hide Completed</label>
     </CheckboxStyled>
   );

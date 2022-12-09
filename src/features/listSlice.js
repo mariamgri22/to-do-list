@@ -4,7 +4,6 @@ import axios from "axios";
 export const getTasks = createAsyncThunk("lists/getTasks", async () => {
   try {
     const response = await axios.get("http://localhost:8000/lists");
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -73,40 +72,47 @@ export const deleteTask = createAsyncThunk(
   }
 );
 
+const localStorageSet = (state) =>
+  localStorage.setItem("list/get", JSON.stringify(state));
+
+const initialState = JSON.parse(localStorage.getItem("list/get")) || {
+  isLoading: false,
+  lists: [],
+};
+
 const listSlice = createSlice({
   name: "lists",
-  initialState: {
-    isLoading: false,
-    lists: [],
-  },
+  initialState,
   reducers: {},
   extraReducers: {
     [getTasks.pending]: (state) => {
       return { isLoading: true, lists: [] };
     },
     [getTasks.fulfilled]: (state, action) => {
-      console.log("🚀 ~ file: listSlice.js:22 ~ action", action);
-      return { lists: action.payload, isLoading: false };
+      state.lists = action.payload;
+      localStorageSet(state.lists); 
     },
     [getTasks.rejected]: (state) => {
       return { isLoading: false, lists: [] };
     },
     [addTasks.fulfilled]: (state, action) => {
-      console.log("🚀 ~ file: listSlice.js:49 ~ action", action);
       state.lists.unshift(action.payload);
+      localStorageSet(state.lists);
     },
     [toggleTasks.fulfilled]: (state, action) => {
       const selectedTodo = state.lists.find(
         (todo) => todo.id === action.payload.id
       );
       selectedTodo.isComplete = action.payload.isComplete;
+      localStorageSet(selectedTodo);
     },
     [deleteTask.fulfilled]: (state, action) => {
       state.lists = state.lists.filter((todo) => todo.id !== action.payload.id);
+      localStorageSet(state.lists);
     },
     [getFilteredTasks.fulfilled]: (state, action) => {
-      console.log("🚀 ~ file: listSlice.js:103 ~ action", action);
       state.lists = action.payload;
+      localStorageSet(state.lists);
     },
   },
 });

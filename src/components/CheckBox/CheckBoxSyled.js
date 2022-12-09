@@ -9,3 +9,7 @@ export const CheckboxStyled = styled.div`
   }
 `;
 
+export const CheckBoxInput = styled.input.attrs({ type: "checkbox" })`
+  width: 24px;
+  accent-color: #008594;
+`;

@@ -7,7 +7,7 @@ export default function EmptyHome() {
 
   return (
     <>
-      {lists.length === 0 && (
+      {lists?.length === 0 && (
         <EmptyHomeStyled>
           <EmptyH4>Your life is a blank page. You write on it.</EmptyH4>
           <EmptyHomeH3>So start by adding your tasks here.</EmptyHomeH3>

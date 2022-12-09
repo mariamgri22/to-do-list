@@ -4,14 +4,14 @@ export const TaskItemStyled = styled.div`
   display: flex;
   justify-content: space-between;
   word-break: break-all;
-  padding-top: 0 20px;
+  padding: 10px 0;
   border-bottom: 1px solid #e5e5e5;
   width: 100%;
   @media (min-width: 375px) and (max-width: 391px) {
     width: 327px;
   }
   h4 {
-    font-size: 1.125rem;
+    font-size: 18px;
     font-weight: 400;
     color: #666666;
     padding-right: 10px;
@@ -24,10 +24,12 @@ export const TaskItemStyled = styled.div`
 export const TaskItemSpam = styled.span`
   display: flex;
 `;
-export const TaskItemInput = styled.input`
-  width: 24px;
-  padding-right: 50px;
-  background: #008594;
+
+export const TaskItemInput = styled.input.attrs({ type: "checkbox" })`
+  width: 18px;
+  margin-right: 50px;
+  accent-color: #008594;
+  border: 2px solid #008594;
 `;
 
 export const TaskItemModalSpan = styled.span`

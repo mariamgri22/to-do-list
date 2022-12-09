@@ -21,7 +21,6 @@ export default function TaskItem({ id, task, isComplete }) {
           <TaskItemInput
             type="checkbox"
             checked={isComplete}
-            style={{ accentColor: "#008594" }}
             onChange={(e) =>
               dispatch(toggleTasks({ id, task, isComplete: !isComplete }))
             }
